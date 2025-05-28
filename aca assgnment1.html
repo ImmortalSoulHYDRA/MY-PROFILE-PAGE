@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kirankumar Khandu - Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      transition: all 0.4s ease;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --project-bg: #f0f0f0;
+      --project-text: #e91e63; /* Pink color */
+      --project-border: #007bff;
+    }
+
+    body.dark-mode {
+      --bg: #121212;
+      --text: #ffffff;
+      --project-bg: #1e1e1e;
+      --project-text: #ff80ab; /* Lighter pink for dark mode */
+      --project-border: #007bff;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background: var(--bg);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .profile-img-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #007bff;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      transition: transform 0.3s ease;
+    }
+
+    .project {
+      background: var(--project-bg);
+      padding: 10px;
+      margin: 5px 0;
+      border-left: 5px solid var(--project-border);
+      color: var(--project-text);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .intro {
+      margin: 15px 0;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body onload="showGreeting()">
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">🌗 Toggle Theme</button>
+  </div>
+
+  <div class="container">
+    <div class="profile-img-container">
+      <img src="file:///C:/Users/kiran/OneDrive/Desktop/ADVANCE/prooffpic.jpg" 
+           alt="Kirankumar Khandu" 
+           class="profile-img"
+           onerror="handleImageError(this)">
+    </div>
+    <h1>Kirankumar Khandu</h1>
+    <p class="greeting" id="greeting"></p>
+    <div class="intro">
+      <p>I am Kirankumar Khandu, an undergraduate student at IIT Kanpur, Course-BS Department- Earth Sciences. I am an aspiring programmer, completing one project at a time.</p>
+    </div>
+
+    <h2>Hobbies</h2>
+    <ul>
+      <li>Dancing</li>
+      <li>Volleyball</li>
+      <li>Watching movies</li>
+    </ul>
+
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">To-Do List App</div>
+      <div class="project">Web Development (ACA)</div>
+    </div>
+
+    <h2>Skills & Courses</h2>
+    <div id="skills-list">
+      <ul>
+        <li>C & CPP</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <span id="more-skills" style="display:none;">
+          <li>JAVA SCRIPT</li>
+          <li>PYTHON</li>
+        </span>
+      </ul>
+      <button onclick="toggleSkills()">Read More</button>
+      <button onclick="editSkills()">Add Skill</button>
+    </div>
+
+    <h2>Contact</h2>
+    <p>Email: kirankumar08@gmail.com</p>
+    <p>Phone: 636275****</p>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function toggleSkills() {
+      const more = document.getElementById("more-skills");
+      const btn = event.target;
+      if (more.style.display === "none") {
+        more.style.display = "inline";
+        btn.textContent = "Read Less";
+      } else {
+        more.style.display = "none";
+        btn.textContent = "Read More";
+      }
+    }
+
+    function editSkills() {
+      const list = document.querySelector("#skills-list ul");
+      const newSkill = prompt("Enter a new skill to add:");
+      if (newSkill) {
+        const li = document.createElement("li");
+        li.textContent = newSkill;
+        list.appendChild(li);
+      }
+    }
+
+    function showGreeting() {
+      const greetings = [
+        "Welcome to my profile!",
+        "Hello there! 👋",
+        "Glad to see you here!",
+        "Hope you're having a great day!",
+      ];
+      const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+      document.getElementById("greeting").textContent = randomGreeting;
+    }
+
+    function handleImageError(img) {
+      console.log("Image failed to load, trying fallback...");
+      img.onerror = null;
+      img.src = "https://via.placeholder.com/150?text=Profile+Pic";
+    }
+  </script>
+</body>
+</html>
